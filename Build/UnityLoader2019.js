@@ -3200,7 +3200,7 @@ var UnityLoader = UnityLoader || {
         }
     }(),
     compatibilityCheck: function(e, t, r) {
-        UnityLoader.SystemInfo.hasWebGL ? UnityLoader.SystemInfo.mobile ? e.popup("Please note that Unity WebGL is not currently supported on mobiles. Press OK if you wish to continue anyway.", [{
+        UnityLoader.SystemInfo.hasWebGL ? UnityLoader.SystemInfo.mobile&&1==0 ? e.popup("Please note that Unity WebGL is not currently supported on mobiles. Press OK if you wish to continue anyway.", [{
             text: "OK",
             callback: t
         }]) : ["Edge", "Firefox", "Chrome", "Safari"].indexOf(UnityLoader.SystemInfo.browser) == -1 ? e.popup("Please note that your browser is not currently supported for this Unity WebGL content. Press OK if you wish to continue anyway.", [{
@@ -3359,7 +3359,7 @@ var UnityLoader = UnityLoader || {
             } : null
         })
     },
-    downloadFile: function(e, t, i){        
+    downloadFile: function(e, t, i){
       globalCurrentFile= i;
       globalTotalFile= e.totalFile;
         return new Promise(function (resolve, reject) {
@@ -3378,9 +3378,9 @@ var UnityLoader = UnityLoader || {
     },
     downloadJobMulti: async function(e, t) {
         var res = null;
-        var allFile = new Uint8Array(e.size);        
+        var allFile = new Uint8Array(e.size);
         for(i = 0; i < e.totalFile; i++){
-            var tmp = await UnityLoader.downloadFile(e, t, i);            
+            var tmp = await UnityLoader.downloadFile(e, t, i);
             var size = e.split_size;
             allFile.set(new Uint8Array(tmp), size*i);
         }
